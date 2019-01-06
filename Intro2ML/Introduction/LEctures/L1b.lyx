@@ -1,0 +1,2246 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass beamer
+\begin_preamble
+\setcounter{MaxMatrixCols}{10}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{mathpazo}
+\usepackage{hyperref}
+%\usepackage{multimedia}
+\usepackage{movie15}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\definecolor{RawSienna}{cmyk}{0,0.87,0.82,0.31}
+\definecolor{gray97}{cmyk}{0,0,0,0.03}
+\definecolor{robinsegg}{cmyk}{0.18,0.04,0,0.07}
+\definecolor{cola}{cmyk}{0,0.315,0.35,0.155}
+
+\newenvironment{stepenumerate}{\begin{enumerate}[<+->]}{\end{enumerate}}
+\newenvironment{stepitemize}{\begin{itemize}[<+->]}{\end{itemize} }
+\newenvironment{stepenumeratewithalert}{\begin{enumerate}[<+-| alert@+>]}{\end{enumerate}}
+\newenvironment{stepitemizewithalert}{\begin{itemize}[<+-| alert@+>]}{\end{itemize} }
+\usecolortheme[named=RawSienna]{structure}
+%\usecolortheme[RGB={205,0,0}]{structure}
+\setbeamertemplate{navigation symbols}{}
+\useoutertheme{infolines}
+\usetheme{default}
+\setbeamertemplate{blocks}[shadow=true]
+%\setbeamerfont{structure}{shape=\itshape}
+\usefonttheme{structuresmallcapsserif}
+\setbeamertemplate{background canvas}{
+ % \ifnum \thepage>0 \relax % we are on the first page
+%\includegraphics[width=\paperwidth,height=\paperheight]{/home/mv/Dropbox/Foton/IconsWallpaper/greyribbonLighter.jpg}
+ % \else
+ 	% No background for page 2 and onwards
+ % \fi
+}
+\end_preamble
+\options xcolor=svgnames, handout
+\use_default_options false
+\begin_modules
+knitr
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman palatino
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+732A52
+\end_layout
+
+\end_inset
+
+Introduction to Machine Learning
+\begin_inset VSpace smallskip
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Topic 1: Bayesian learning
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Lecture 1b
+\end_layout
+
+\begin_layout Author
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Mattias Villani
+\end_layout
+
+\end_inset
+
+Mattias Villani
+\end_layout
+
+\begin_layout Institute
+
+\series bold
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+STIMA, LiU
+\end_layout
+
+\end_inset
+
+Division of Statistics and Machine Learning
+\begin_inset Newline newline
+\end_inset
+
+Department of Computer and Information Science
+\begin_inset Newline newline
+\end_inset
+
+Linköping University 
+\end_layout
+
+\begin_layout Date
+\begin_inset Graphics
+	filename LiU_secondary_1_black.png
+	lyxscale 7
+	scale 15
+
+\end_inset
+
+
+\begin_inset space \thinspace{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Overview of Lecture 1b
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\series bold
+\color blue
+Introduction to Bayesian learning
+\series default
+\color inherit
+
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\color blue
+Bernoulli model with beta prior
+\series default
+\color inherit
+
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\color blue
+Normal model with normal prior
+\series default
+\color inherit
+
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\color blue
+Multinomial model with Dirichlet prior
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+
+\size larger
+The likelihood function - Bernoulli trials
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\series bold
+Bernoulli trials
+\series default
+:
+\begin_inset Formula 
+\[
+x_{1},...,x_{n}|\theta\overset{iid}{\sim}Bern(\theta).
+\]
+
+\end_inset
+
+
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Likelihood
+\series default
+ from 
+\begin_inset Formula $s=\sum_{i=1}^{n}x_{i}$
+\end_inset
+
+ successes and 
+\begin_inset Formula $f=n-s$
+\end_inset
+
+ failures.
+ 
+\begin_inset Formula 
+\begin{eqnarray*}
+p(x_{1},...,x_{n}|\theta) & = & p(x_{1}|\theta)\cdots p(x_{n}|\theta)=\theta^{s}(1-\theta)^{f}
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Maximum likelihood estimator
+\series default
+ 
+\begin_inset Formula $\hat{\theta}$
+\end_inset
+
+ maximizes 
+\begin_inset Formula $p(x_{1},...,x_{n}|\theta)$
+\end_inset
+
+.
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Given the data 
+\begin_inset Formula $x_{1},...,x_{n}$
+\end_inset
+
+, we may plot 
+\begin_inset Formula $p(x_{1},...,x_{n}|\theta)$
+\end_inset
+
+ as a function of 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename ../../../BayesLearning/Slides/BernLike_n10s4.eps
+	scale 20
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../../../BayesLearning/Slides/BernLike_n100s40.eps
+	scale 20
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../../../BayesLearning/Slides/BernLike_n10s9.eps
+	scale 20
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+
+\size larger
+Uncertainty and subjective probability
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Statements like 
+\begin_inset Formula $\mathrm{Pr}$
+\end_inset
+
+
+\begin_inset Formula $(\theta<0.6\vert\text{data})$
+\end_inset
+
+ only make sense if 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is random.
+ 
+\end_layout
+
+\begin_layout Itemize
+But 
+\begin_inset Formula $\theta$
+\end_inset
+
+ may be
+\shape italic
+ 
+\shape default
+a fixed natural constant?
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Bayesian: doesn't matter if 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is fixed or random
+\series default
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+Do You know the value of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ or not?
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $p(\theta)$
+\end_inset
+
+ reflects Your knowledge/
+\series bold
+uncertainty
+\series default
+ about 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Subjective probability
+\series default
+.
+\end_layout
+
+\begin_layout Itemize
+The statement 
+\begin_inset Formula $p(10\text{th}\,\text{decimal of }\pi=9)=0.1$
+\end_inset
+
+ makes sense.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename ../../../BayesLearning/Slides/deFinettiBook.jpeg
+	lyxscale 20
+	scale 40
+
+\end_inset
+
+
+\begin_inset space \enskip{}
+\end_inset
+
+
+\begin_inset space \enskip{}
+\end_inset
+
+
+\begin_inset space \enskip{}
+\end_inset
+
+
+\begin_inset space \enskip{}
+\end_inset
+
+
+\begin_inset space \enskip{}
+\end_inset
+
+
+\begin_inset space \enskip{}
+\end_inset
+
+
+\begin_inset space \enskip{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../../../BayesLearning/Slides/deFinetti.jpg
+	lyxscale 20
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../../../BayesLearning/Slides/pi_circle.jpg
+	lyxscale 20
+	scale 20
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Bayesian learning
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\series bold
+Bayesian learning
+\series default
+ about a model parameter 
+\begin_inset Formula $\theta$
+\end_inset
+
+: 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+state your 
+\series bold
+prior
+\series default
+ knowledge about 
+\begin_inset Formula $\theta$
+\end_inset
+
+ as a probability distribution 
+\begin_inset Formula $p(\theta)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+collect data
+\series default
+ 
+\begin_inset Formula $x$
+\end_inset
+
+ and form the 
+\series bold
+likelihood
+\series default
+ function 
+\begin_inset Formula $p(x\vert\theta)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+combine
+\series default
+ your prior knowledge 
+\begin_inset Formula $p(\theta)$
+\end_inset
+
+ with the data information 
+\begin_inset Formula $p(x\vert\theta)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+How to combine
+\series default
+ the two sources of information? 
+\series bold
+\color blue
+Bayes' theorem
+\series default
+\color inherit
+.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename ../../../BayesLearning/Slides/BayesTheoremNeon.jpg
+	lyxscale 20
+	scale 18
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Great theorems make great tattoos
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\series bold
+\color blue
+Bayes' theorem
+\series default
+\color inherit
+
+\begin_inset Formula 
+\[
+p(\theta|Data)=\frac{p(Data|\theta)p(\theta)}{p(Data)}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+All you need to know:
+\begin_inset Formula 
+\[
+p(\theta|Data)\propto p(Data|\theta)p(\theta)
+\]
+
+\end_inset
+
+or
+\begin_inset Formula 
+\[
+\text{Posterior}\propto\text{ Likelihood }\cdot\text{ Prior}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename /Users/matvi05/Dropbox/Seminars/Umea2013/BayesTattoo.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Bernoulli trials - Beta prior
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\series bold
+Model
+\series default
+ 
+\begin_inset Formula 
+\[
+x_{1},...,x_{n}|\theta\overset{iid}{\sim}Bern(\theta)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Prior
+\series default
+
+\begin_inset Formula 
+\[
+\theta\sim Beta(\alpha,\beta)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+p(\theta)=\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\theta^{\alpha-1}(1-\theta)^{\beta-1}\text{ \ for }0\leq\theta\leq1\text{.}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Posterior
+\series default
+
+\begin_inset Formula 
+\begin{eqnarray*}
+p(\theta|x_{1},...,x_{n}) & \propto & p(x_{1},...,x_{n}|\theta)p(\theta)\\
+ & \propto & \theta^{s}(1-\theta)^{f}\theta^{\alpha-1}(1-\theta)^{\beta-1}\\
+ & = & \theta^{s+\alpha-1}(1-\theta)^{f+\beta-1}.
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+This is proportional to the 
+\begin_inset Formula $Beta(\alpha+s,\beta+f)$
+\end_inset
+
+ density.
+ 
+\end_layout
+
+\begin_layout Itemize
+The 
+\series bold
+prior-to-posterior
+\series default
+ mapping reads
+\begin_inset Formula 
+\[
+\theta\sim Beta(\alpha,\beta)\overset{x_{1},...,x_{n}}{\Longrightarrow}\theta|x_{1},...,x_{n}\sim Beta(\alpha+s,\beta+f).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Beta distribution
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\series bold
+Beta random variable
+\series default
+
+\begin_inset Formula 
+\[
+X\sim Beta(\alpha,\beta)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Probability density function (
+\series bold
+pdf
+\series default
+)
+\begin_inset Formula 
+\[
+f(x)=\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}x^{\alpha-1}(1-x)^{\beta-1}\text{ \ for }0\leq x\leq1\text{.}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename Beta_distribution_pdf.svg
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Bernoulli example: spam emails
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+George has gone through his collection of 
+\begin_inset Formula $4601$
+\end_inset
+
+ e-mails.
+ He classified 
+\begin_inset Formula $1813$
+\end_inset
+
+ of them to be spam.
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Let 
+\begin_inset Formula $x_{i}=1$
+\end_inset
+
+ if i:th email is spam.
+ Assume 
+\begin_inset Formula $x_{i}|\theta\overset{iid}{\sim}Bernoulli(\theta)$
+\end_inset
+
+ and 
+\begin_inset Formula $\theta\sim\mathrm{Beta}(\alpha,\beta)$
+\end_inset
+
+.
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Posterior
+\begin_inset Formula 
+\[
+\theta|x\sim Beta(\alpha+1813,\beta+2788)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Spam data (n=10): prior sensitivity
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename /Users/matvi05/Dropbox/Projects/BayesBook/Figures/SpamDataSmall.eps
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Spam data (n=100): prior sensitivity
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename /Users/matvi05/Dropbox/Projects/BayesBook/Figures/SpamDataMedium.eps
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Spam data (n=4601): prior sensitivity
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename /Users/matvi05/Dropbox/Projects/BayesBook/Figures/SpamDataFull.eps
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Normal data, known variance - normal prior
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Prior 
+\begin_inset Formula 
+\[
+\theta\sim N(\mu_{0},\tau_{0}^{2})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Posterior
+\begin_inset Formula 
+\begin{eqnarray*}
+p(\theta|x_{1},...,x_{n}) & \propto & p(x_{1},...,x_{n}|\theta,\sigma^{2})p(\theta)\\
+ & \propto & N(\theta|\mu_{n},\tau_{n}^{2}),
+\end{eqnarray*}
+
+\end_inset
+
+where
+\begin_inset Formula 
+\[
+\frac{1}{\tau_{n}^{2}}=\frac{n}{\sigma^{2}}+\frac{1}{\tau_{0}^{2}},
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mu_{n}=w\bar{x}+(1-w)\mu_{0},
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+w=\frac{\frac{n}{\sigma^{2}}}{\frac{n}{\sigma^{2}}+\frac{1}{\tau_{0}^{2}}}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Normal data, known variance - normal prior
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\align center
+\begin_inset Formula $\theta\sim N(\mu_{0},\tau_{0}^{2})\overset{x_{1},...,x_{n}}{\Longrightarrow}\theta|x\sim N(\mu_{n},\tau_{n}^{2}).$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+Posterior precision = Data precision + Prior precision
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+Posterior mean =
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Formula $\frac{\text{Data precision}}{\text{Posterior precision}}$
+\end_inset
+
+(Data mean) + 
+\begin_inset Formula $\frac{\text{Prior precision}}{\text{Posterior precision}}$
+\end_inset
+
+(Prior mean) 
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Canadian wages data
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Data on wages for 
+\begin_inset Formula $205$
+\end_inset
+
+ Canadian workers.
+ 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename ../../../BayesLearning/Slides/CanadianaWagesDataHist.eps
+	scale 45
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Canadian wages
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Model
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+X_{1},...,X_{n}|\theta\sim N(\theta,\sigma^{2}),\text{ }\sigma^{2}=0.4
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Prior
+\begin_inset Formula 
+\[
+\theta\sim N(\mu_{0},\tau_{0}^{2}),\text{ }\mu_{0}=12\text{ and }\tau_{0}=10
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Posterior
+\begin_inset Formula 
+\[
+\theta|x_{1},...,x_{n}\sim N\left(\mu_{n},\tau_{n}^{2}\right),
+\]
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+where 
+\begin_inset Formula $\mu_{n}=w\bar{x}+(1-w)\mu_{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+For the Canadian wage data:
+\begin_inset Formula 
+\[
+w=\frac{\sigma^{-2}n}{\sigma^{-2}n+\tau_{0}^{-2}}=\frac{2.5\cdot205}{2.5\cdot205+1/100}=0.999.
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mu_{n}=w\bar{x}+(1-w)\mu_{0}=0.999\cdot13.489+(1-0.999)\cdot12\approx13.489
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula 
+\[
+\tau_{n}^{2}=\left(2.5\cdot205+1/100\right)^{-1}=0.00195
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Marginalization
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Models with multiple parameters 
+\begin_inset Formula $\theta_{1},\theta_{2},...$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+Examples: 
+\begin_inset Formula $x_{i}\overset{iid}{\sim}N(\theta,\sigma^{2})$
+\end_inset
+
+; multiple regression ...
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\color blue
+Joint posterior distribution
+\series default
+\color inherit
+
+\begin_inset Formula 
+\[
+p(\theta_{1},\theta_{2},...,\theta_{p}|y)\propto p(y|\theta_{1},\theta_{2},...,\theta_{p})p(\theta_{1},\theta_{2},...,\theta_{p}).
+\]
+
+\end_inset
+
+...
+ or in vector form:
+\begin_inset Formula 
+\[
+p(\theta)\propto p(y|\theta)p(\theta).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Complicated to graph the joint posterior.
+\end_layout
+
+\begin_layout Itemize
+Some of the parameters may not be of direct interest (
+\series bold
+\color blue
+nuisance
+\series default
+\color inherit
+).
+\end_layout
+
+\begin_layout Itemize
+Integrate out (
+\series bold
+\color blue
+marginalize
+\series default
+\color inherit
+) all nuisance parameters.
+\end_layout
+
+\begin_layout Itemize
+Example: 
+\begin_inset Formula $\theta=(\theta_{1},\theta_{2})^{\prime}$
+\end_inset
+
+, 
+\begin_inset Formula $\theta_{2}$
+\end_inset
+
+ is a nuisance.
+ 
+\series bold
+Marginal posterior
+\series default
+ of 
+\begin_inset Formula $\theta_{1}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{eqnarray*}
+p(\theta_{1}|y) & = & \int p(\theta_{1},\theta_{2}|y)d\theta_{2}.
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Multinomial model with Dirichlet prior
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\shape italic
+Data
+\shape default
+: 
+\begin_inset Formula $y=(y_{1},...y_{K})$
+\end_inset
+
+, where 
+\begin_inset Formula $y_{k}$
+\end_inset
+
+ counts the number of observations in the 
+\begin_inset Formula $k$
+\end_inset
+
+th category.
+ 
+\begin_inset Formula $\sum_{k=1}^{K}y_{k}=n$
+\end_inset
+
+.
+ Example: brand choices.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\color blue
+Multinomial model
+\series default
+\color inherit
+:
+\begin_inset Formula 
+\[
+p(y|\theta)\propto\prod_{k=1}^{K}\theta_{k}^{y_{k}},\text{ where }\sum_{k=1}^{K}\theta_{j}=1.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\shape italic
+\emph on
+\color blue
+Prior
+\series default
+\shape default
+\color inherit
+:
+\emph default
+ 
+\begin_inset Formula $\mathrm{Dirichlet}(\alpha_{1},...,\alpha_{K})$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+p(\theta)\propto\prod_{k=1}^{K}\theta_{j}^{\alpha_{j}-1}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Moments of 
+\begin_inset Formula $\theta=(\theta_{1},...,\theta_{K})'\sim Dirichlet(\alpha_{1},...,\alpha_{K})$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\mathrm{E}(\theta_{k}) & =\frac{\alpha_{k}}{\sum_{j=1}^{K}\alpha_{j}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\alpha_{+}=$
+\end_inset
+
+
+\begin_inset Formula $\sum_{k=1}^{K}\alpha_{k}$
+\end_inset
+
+ is a precision parameter.
+ Variance of 
+\begin_inset Formula $\theta_{k}$
+\end_inset
+
+ is large when 
+\begin_inset Formula $\alpha_{+}$
+\end_inset
+
+ is small.
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Dirichlet distribution
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename DirichletPlot.png
+	lyxscale 30
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Multinomial model with Dirichlet prior
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+'Non-informative': 
+\begin_inset Formula $\alpha_{1}=...=\alpha_{K}=1$
+\end_inset
+
+ (uniform and proper).
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\color blue
+Simulating
+\series default
+\color inherit
+ from the Dirichlet distribution:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Generate 
+\begin_inset Formula $x_{1}\sim Gamma(\alpha_{1},1),...,x_{K}\sim Gamma(\alpha_{K},1)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Compute 
+\begin_inset Formula $y_{k}=x_{k}/(\sum_{j=1}^{K}x_{j})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $y=(y_{1},...,y_{K})$
+\end_inset
+
+ is a draw from the 
+\begin_inset Formula $\mathrm{Dirichlet}(\alpha_{1},...,\alpha_{K})$
+\end_inset
+
+ distribution.
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+\shape italic
+\emph on
+\color blue
+Prior-to-Posterior updating
+\series default
+\shape default
+\color inherit
+:
+\emph default
+
+\begin_inset Formula 
+\begin{gather*}
+Model\text{: \ \ \ \ }y=(y_{1},...y_{K})\sim\mathrm{Multin}(n;\theta_{1},...,\theta_{K})\\
+Prior:\text{ \ \ }\theta=(\theta_{1},...,\theta_{K})\sim\mathrm{Dirichlet}(\alpha_{1},...,\alpha_{K})\\
+Posterior:\text{ \ \ }\theta|y\sim\mathrm{Dirichlet}(\alpha_{1}+y_{1},...,\alpha_{K}+y_{K}).
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Example: market shares
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+A recent survey among consumer smartphones owners in the U.S.
+ showed that among the 513 respondents:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+180 owned an iPhone
+\end_layout
+
+\begin_layout Itemize
+230 owned an Android phone
+\end_layout
+
+\begin_layout Itemize
+62 owned a Blackberry phone
+\end_layout
+
+\begin_layout Itemize
+41 owned some other mobile phone.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Previous survey: iPhone 30%, Android 30%, Blackberry 20% and Other 20%.
+\end_layout
+
+\begin_layout Itemize
+Pr(Android has largest share | Data)
+\end_layout
+
+\begin_layout Itemize
+Prior: 
+\begin_inset Formula $\alpha_{1}=15,\alpha_{2}=15,\alpha_{3}=10\text{ and }\alpha_{4}=10$
+\end_inset
+
+ (prior info is equivalent to a survey with only 
+\begin_inset Formula $50$
+\end_inset
+
+ respondents)
+\end_layout
+
+\begin_layout Itemize
+Posterior: 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $(\theta_{1},\theta_{2},\theta_{3},\theta_{4})|\mathbf{y}\sim\mathrm{Dirichlet(195,245,72,51)}$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{frame}[fragile]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+frametitle{R code for market share example}
+\end_layout
+
+\begin_layout Plain Layout
+
+<<MultinomialPrior2Post1, eval=TRUE, size='tiny'>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+# Setting up data and prior
+\end_layout
+
+\begin_layout Plain Layout
+
+y <- c(180,230,62,41) # The cell phone survey data (K=4)
+\end_layout
+
+\begin_layout Plain Layout
+
+alpha <- c(15,15,10,10) # Dirichlet prior hyperparameters 
+\end_layout
+
+\begin_layout Plain Layout
+
+nIter <- 1000 # Number of posterior draws
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+# Defining a function that simulates from a Dirichlet distribution 
+\end_layout
+
+\begin_layout Plain Layout
+
+SimDirichlet <- function(nIter, param){ 	
+\end_layout
+
+\begin_layout Plain Layout
+
+  nCat <- length(param) 	
+\end_layout
+
+\begin_layout Plain Layout
+
+  thetaDraws <- as.data.frame(matrix(NA, nIter, nCat)) # Storage.
+ 	
+\end_layout
+
+\begin_layout Plain Layout
+
+  for (j in 1:nCat){ 		
+\end_layout
+
+\begin_layout Plain Layout
+
+    thetaDraws[,j] <- rgamma(nIter,param[j],1) 	
+\end_layout
+
+\begin_layout Plain Layout
+
+  } 	
+\end_layout
+
+\begin_layout Plain Layout
+
+  for (i in 1:nIter){ 		
+\end_layout
+
+\begin_layout Plain Layout
+
+    thetaDraws[i,] = thetaDraws[i,]/sum(thetaDraws[i,])	
+\end_layout
+
+\begin_layout Plain Layout
+
+  } 	
+\end_layout
+
+\begin_layout Plain Layout
+
+  return(thetaDraws) 
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+# Posterior sampling from Dirichlet posterior
+\end_layout
+
+\begin_layout Plain Layout
+
+thetaDraws <- SimDirichlet(nIter,y + alpha)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{frame}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{frame}[fragile]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+frametitle{R code for market share example, cont}
+\end_layout
+
+\begin_layout Plain Layout
+
+<<MultinomialPrior2Post2, eval=TRUE, size='tiny'>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+# Posterior mean and standard deviation of Androids share (in %)
+\end_layout
+
+\begin_layout Plain Layout
+
+message(mean(100*thetaDraws[,2])) 
+\end_layout
+
+\begin_layout Plain Layout
+
+message(sd(100*thetaDraws[,2]))
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+# Computing the posterior probability that Android is the largest
+\end_layout
+
+\begin_layout Plain Layout
+
+PrAndroidLargest <- sum(thetaDraws[,2] > max(thetaDraws[,c(1,3,4)]))/nIter
+\end_layout
+
+\begin_layout Plain Layout
+
+message(paste('Pr(Android has the largest market share) = ', PrAndroidLargest))
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{frame}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{frame}[fragile]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+frametitle{R code for market share example, cont}
+\end_layout
+
+\begin_layout Plain Layout
+
+<<MultinomialPrior2Post3, echo = FALSE, eval=TRUE, out.height='0.5
+\backslash
+
+\backslash
+linewidth'>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+# Plots histograms of the posterior draws 
+\end_layout
+
+\begin_layout Plain Layout
+
+par(mfrow = c(1,2)) # Splits the graphical window in four parts
+\end_layout
+
+\begin_layout Plain Layout
+
+hist(100*thetaDraws[,1], breaks = 25, main ='iPhone market share (%)') 
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+hist(100*thetaDraws[,2], breaks = 25, main ='Android market share (%)')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{frame}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Separator
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Bayesian prediction
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Example: Supervised learning.
+ Model: 
+\begin_inset Formula $x\rightarrow y$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\color blue
+Posterior predictive distribution
+\series default
+\color inherit
+
+\begin_inset Formula 
+\[
+p(y_{test}|x_{test},y_{train},x_{train})=\int_{\mathbf{w}}p(y_{test}|\mathbf{w},x_{test})p(\mathbf{w}|y_{train},x_{train})d\mathbf{w}
+\]
+
+\end_inset
+
+where
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Formula $p(y_{test}|\mathbf{w},x_{test})$
+\end_inset
+
+ is the predictive distribution from the model if the parameters 
+\begin_inset Formula $\mathbf{w}$
+\end_inset
+
+ are known.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $p(\mathbf{w}|y_{train},x_{train})$
+\end_inset
+
+ is the posterior distribution of the model parameters 
+\begin_inset Formula $\mathbf{w}$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+The 
+\series bold
+\color blue
+parameter uncertainty
+\series default
+\color inherit
+ is represented in the predictive distribution by 
+\series bold
+\color blue
+averaging over
+\series default
+\color inherit
+ 
+\begin_inset Formula $p(\mathbf{w}|y_{train},x_{train})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Compute the predictive distribution by 
+\series bold
+simulation
+\series default
+.
+ Iterate:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Simulate a random parameter draw
+\color red
+ 
+\begin_inset Formula $\tilde{\mathbf{w}}$
+\end_inset
+
+
+\color inherit
+ from posterior 
+\begin_inset Formula $p(\mathbf{w}|y_{train},x_{train})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Simulate a 
+\begin_inset Formula $y_{test}$
+\end_inset
+
+ from 
+\begin_inset Formula $p(y_{test}|\mathbf{w=}$
+\end_inset
+
+
+\color red
+
+\begin_inset Formula $\tilde{\mathbf{w}}$
+\end_inset
+
+
+\color black
+
+\begin_inset Formula $,x_{test}$
+\end_inset
+
+).
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Separator
+
+\end_layout
+
+\end_body
+\end_document
