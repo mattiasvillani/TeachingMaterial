@@ -1,0 +1,306 @@
+\batchmode
+\makeatletter
+\def\input@path{{/Users/matvi05/Dropbox/Teaching/AdvML/GaussianProcess/Lab/}}
+\makeatother
+\documentclass[11pt,english]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{geometry}
+\geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\usepackage{color}
+\usepackage{babel}
+\usepackage{amsmath}
+\usepackage[unicode=true]
+ {hyperref}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+\makeatother
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+\noindent \begin{flushleft}
+\begin{tabular}{llr}
+LINK?PING UNIVERSITY &
+ &
+2016-09-23\tabularnewline
+Department of Computer and Information Science &
+\hspace{2cm} &
+Advanced Machine Learning\tabularnewline
+Division of Statistics and Machine Learning &
+ &
+Master and PhD course\tabularnewline
+Mattias Villani &
+ &
+\tabularnewline
+\end{tabular}
+\par\end{flushleft}
+
+\vspace{0.3cm}
+
+\noindent \begin{flushleft}
+\begin{tabular}{ll}
+\multicolumn{2}{l}{\textbf{\large{}Gaussian Processes - Computer Lab}}\tabularnewline
+\multicolumn{2}{l}{\rule{0.975\columnwidth}{1pt}}\tabularnewline
+\textbf{Deadline}: &
+See LISAM\tabularnewline
+\textbf{Teacher}: &
+Mattias Villani\tabularnewline
+\textbf{Grades}: &
+Pass/Fail\tabularnewline
+\textbf{Submission:} &
+Via LISAM\tabularnewline
+ &
+\tabularnewline
+\multicolumn{2}{l}{You should use R to solve the lab since the computer exam will be
+in R.}\tabularnewline
+\multicolumn{2}{l}{Output: an individual report and a group report to be presented on
+the seminar.}\tabularnewline
+\multicolumn{2}{l}{Attach your code in LISAM as separate files.}\tabularnewline
+\multicolumn{2}{l}{\rule{0.975\columnwidth}{1pt}}\tabularnewline
+\end{tabular}
+\par\end{flushleft}
+
+\vspace{0.3cm}
+
+\begin{enumerate}
+\item \textbf{Implementing Gaussian process regression from scratch}. This
+first exercise will have you writing your own code for the Gaussian
+process regression model:
+\begin{align*}
+y & =f(x)+\varepsilon\quad\varepsilon\sim N(0,\sigma_{n}^{2})\\
+f & \sim GP\left[0,k\left(x,x^{\prime}\right)\right].
+\end{align*}
+When it comes to the posterior distribution for $f$, I \textbf{strongly}
+suggest that you implement Algorithm 2.1 on page 19 of Rasmussen and
+Willams (RW) \href{http://www.gaussianprocess.org/gpml/chapters/RW2.pdf}{book}.
+That algorithm uses the Cholesky decomposition (\texttt{chol()} in
+R) to attain numerical stability. Here is what you need to do:
+
+\begin{enumerate}
+\item Write your own code for simulating from the posterior distribution
+of $f(x)$ using the squared exponential kernel. The function (name
+it \textsf{\textcolor{black}{posteriorGP}}) should return vectors
+with the posterior mean and variance of $f$, both evaluated at a
+set of $x$-values ($x^{\star}$). You can assume that the prior mean
+of $f$ is zero for all $x$. The function should have the following
+inputs:
+
+\begin{enumerate}
+\item \textsf{\textcolor{black}{x}} (vector of training inputs)
+\item \textsf{\textcolor{black}{y}} (vector of training targets/outputs)
+\item \textsf{\textcolor{black}{xStar}} (vector of inputs where the posterior
+distribution is evaluated, i.e. $x^{\star}$. As in my slides).
+\item \textsf{\textcolor{black}{hyperParam}} (vector with two elements $\sigma_{f}$
+and $\ell$)
+\item \textsf{\textcolor{black}{sigmaNoise}} ($\sigma_{n}$).\\
+{[}Hint: I would write a separate function for the Kernel (see my
+\textsf{\textcolor{black}{GaussianProcess.R}} function on the course
+web page) which is then called from the \textsf{\textcolor{black}{posteriorGP}}
+function.{]}
+\end{enumerate}
+\item Now let the prior hyperparameters be $\sigma_{f}=1,\ell=0.3$. Update
+this prior with a single observation: $(x,y)=(0.4,0.719)$. Assume
+that the noise standard deviation is known to be $\sigma_{n}=0.1$.
+Plot the posterior mean of $f$ over the interval $x\in[-1,1]$. Plot
+also $95\%$ probability (pointwise) bands for $f$.
+\item Update your posterior from 1b) with another observation: $(x,y)=(-0.6,-0.044)$.
+Plot the posterior mean of $f$ over the interval $x\in[-1,1]$. Plot
+also $95\%$ probability bands for $f$. {[}Hint: updating the posterior
+after one observation with a new observation gives the same result
+as updating the prior directly with the two observations. Bayes is
+beautiful!{]}
+\item Compute the posterior distribution of $f$ using all $5$ data points
+in Table 1 below (note that the two previous observations are included
+in the table). Plot the posterior mean of $f$ over the interval $x\in[-1,1]$.
+Plot also $95\%$ probability intervals for $f$.
+\item [(e)]Repeat 1d), this time with the hyperparameters $\sigma_{f}=1,\ell=1$.
+Compare the results.\\
+\begin{table}
+\centering{}%
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline 
+$x$ &
+-1.0 &
+-0.6 &
+-0.2 &
+0.4 &
+0.8\tabularnewline
+\hline 
+$y$ &
+0.768 &
+-0.044 &
+-0.940 &
+0.719 &
+-0.664\tabularnewline
+\hline 
+\end{tabular}\caption{Simple data set for GP regression.}
+\end{table}
+\end{enumerate}
+\item \textbf{Gaussian process regression on real data using the }\texttt{\textbf{kernlab}}\textbf{
+package}. This exercise lets you explore the kernlab package on a
+data set of daily mean temperature in Stockholm (Tullinge) during
+the period January 1, 2010 - December 31, 2015. I have removed the
+leap year day February 29, 2012 to make your life simpler. You can
+read the dataset with the command: \\
+\texttt{\scriptsize{}read.csv('https://github.com/STIMALiU/AdvMLCourse/raw/master/GaussianProcess/Code/TempTullinge.csv',
+header=TRUE, sep=';')}\\
+Create the variable \texttt{time} which records the day number since
+the start of the dataset (i.e. \texttt{time}$=1,2,...,365\cdot6=2190$
+). Also, create the variable \texttt{day} that records the day number
+since the start of each year (i.e. \texttt{day}$=1,2,...,365,1,2,...,365$).
+Estimating a GP on $2190$ observations can take some time on slower
+computers, so let's thin out the data by only using every fifth observation.
+This means that your time variable is now \texttt{time}$=1,6,11,...,2186$
+and \texttt{day$=1,6,11,...,361,1,6,...,361$.}
+\begin{enumerate}
+\item Familiarize yourself with the following functions in \texttt{kernlab},
+in particular the \texttt{gausspr} and \texttt{kernelMatrix} function.
+Do \texttt{?gausspr} and read the input arguments and the output.
+Also, go through my \texttt{KernLabDemo.R} carefully; you will need
+to understand it. Now, define your own square exponential kernel function
+(with parameters $\ell$ (\texttt{ell}) and $\sigma_{f}$ (\texttt{sigmaf})),
+evaluate it in the point $x=1$, $x^{\prime}=2$, and use the \texttt{kernelMatrix}
+function to compute the covariance matrix $K(\mathbf{x},\mathbf{x}_{\star})$
+for the input vectors $\mathbf{x}=(1,3,4)^{T}$ and $\mathbf{x}_{\star}=(2,3,4)^{T}$.
+\item Consider first the model:
+\begin{align*}
+temp & =f(time)+\varepsilon\quad\varepsilon\sim N(0,\sigma_{n}^{2})\\
+f & \sim GP\left[0,k(time,time^{\prime})\right]
+\end{align*}
+Let $\sigma_{n}^{2}$ be the residual variance from a simple quadratic
+regression fit (using the\texttt{ lm()} function in R). Estimate the
+above Gaussian process regression model using the squared exponential
+function from 2a) with $\sigma_{f}=20$ and $\ell=0.2$. Use the predict
+function to compute the posterior mean at every data point in the
+training datasets. Make a scatterplot of the data and superimpose
+the posterior mean of $f$ as a curve (use \texttt{type=\textquotedbl{}l\textquotedbl{}}
+in the plot function). Play around with different values on $\sigma_{f}$
+and $\ell$ (no need to write this in the report though).
+\item \texttt{Kernlab} can compute the posterior variance of $f$, but I
+suspect a bug in the code (I get weird results). Do you own computations
+for the posterior variance of $f$ (hint: Algorithm 2.1 in RW), and
+plot 95\% (pointwise) posterior probability bands for $f$. Use $\sigma_{f}=20$
+and $\ell=0.2$. Superimpose those bands on the figure with the posterior
+mean in 2b).
+\item Consider now the model
+\begin{align*}
+temp & =f(day)+\varepsilon\quad\varepsilon\sim N(0,\sigma_{n}^{2})\\
+f & \sim GP\left[0,k(day,day^{\prime})\right]
+\end{align*}
+Estimate the model using the squared exponential function from 2a)
+with $\sigma_{f}=20$ and $\ell=6\cdot0.2=1.2$. (I multiplied $\ell$
+by 6 compared to when you used \texttt{time} as input variable since
+\texttt{kernlab} automatically standardizes the data which makes the
+distance between points larger for \texttt{day} compared to \texttt{time}).
+Superimpose the posterior mean from this model on the fit (posterior
+mean) from the model with \texttt{time} using $\sigma_{f}=20,\ell=0.2$.
+Note that this plot should also have the \texttt{time} variable on
+the horizontal axis. Compare the results from using \texttt{time}
+to the ones with \texttt{day}. What are the pros and cons of each
+model?
+\item Now implement a generalization of the periodic kernel given in my
+slides from Lecture 2 of the GP topic (Slide 6)
+\[
+k(x,x^{\prime})=\sigma_{f}^{2}\exp\left(-\frac{2\sin^{2}\left(\pi\left|x-x^{\prime}\right|/d\right)}{\ell_{1}^{2}}\right)\times\exp\left(-\frac{1}{2}\frac{\left|x-x^{\prime}\right|^{2}}{\ell_{2}^{2}}\right).
+\]
+Note that we have two different length scales here, and $\ell_{2}$
+controls the correlation between the same day in different years $(\ell_{2})$.
+So this kernel has four hyperparameters $\sigma_{f}$, $\ell_{1}$,
+$\ell_{2}$ and the period $d$. Estimate the GP model using the \texttt{time}
+variable with this kernel with hyperparameters $\sigma_{f}=20$, $\ell_{1}=1$,
+$\ell_{2}=10$ and $d=365/$\texttt{sd(time)}. The reason for the
+rather strange period here is that \texttt{kernlab} standardized inputs
+to have standard deviation of 1. Compare the fit to the previous two
+models (with $\sigma_{f}=20,\ell=0.2$). Discuss the results.
+\end{enumerate}
+\item \textbf{Gaussian process classification using the }\texttt{\textbf{kernlab}}\textbf{
+package. }Download the banknote fraud data:\textbf{ }\\
+\texttt{\scriptsize{}data <- read.csv('https://github.com/STIMALiU/AdvMLCourse/raw/master/GaussianProcess/Code/banknoteFraud.csv',
+header=FALSE, sep=',')}~\\
+\texttt{\scriptsize{}names(data) <- c(\textquotedbl{}varWave\textquotedbl{},\textquotedbl{}skewWave\textquotedbl{},\textquotedbl{}kurtWave\textquotedbl{},\textquotedbl{}entropyWave\textquotedbl{},\textquotedbl{}fraud\textquotedbl{})
+}~\\
+\texttt{\scriptsize{}data{[},5{]} <- as.factor(data{[},5{]})}\textbf{}\\
+You can read about this dataset \href{http://archive.ics.uci.edu/ml/datasets/banknote+authentication}{here}.
+Choose 1000 observations as training data using the following command
+(i.e. use the vector \texttt{SelectTraining} to subset the training
+observations)\texttt{\scriptsize{}}~\\
+\texttt{\scriptsize{}set.seed(111); SelectTraining <- sample(1:dim(data){[}1{]},
+size = 1000, replace = FALSE)}{\scriptsize \par}
+\begin{enumerate}
+\item Use \texttt{kernlab} to fit a Gaussian process classification model
+for \texttt{fraud}\textbf{ }on the training data, using \texttt{kernlab}.
+Use \texttt{kernlab}'s the default kernel and hyperparameters. Start
+with using only the first two covariates \texttt{varWave} and \texttt{skewWave}
+in the model. Plot contours of the prediction probabilities over a
+suitable grid of values for \texttt{varWave} and \texttt{skewWave}.
+Overlay the training data for fraud = 1 (as blue points) and fraud
+= 0 (as red points). You can take a lot of code for this from my \texttt{KernLabDemo.R}.
+Compute the confusion matrix for the classifier and its accuracy.
+\item Using the estimated model from 3a), make predictions for the testset.
+Compute the accuracy.
+\item Train a model using all four covariates. Make predictions on the test
+and compare the accuracy to the model with only two covariates.
+\end{enumerate}
+\end{enumerate}
+\bigskip{}
+Good luck!
+
+\bigskip{}
+- Mattias
+\end{document}
