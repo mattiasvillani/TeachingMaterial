@@ -1,0 +1,311 @@
+function varargout = KernelRegGUI(varargin)
+% KERNELREGGUI M-file for KernelRegGUI.fig
+%      KERNELREGGUI, by itself, creates a new KERNELREGGUI or raises the existing
+%      singleton*.
+%
+%      H = KERNELREGGUI returns the handle to a new KERNELREGGUI or the handle to
+%      the existing singleton*.
+%
+%      KERNELREGGUI('CALLBACK',hObject,eventData,handles,...) calls the local
+%      function named CALLBACK in KERNELREGGUI.M with the given input arguments.
+%
+%      KERNELREGGUI('Property','Value',...) creates a new KERNELREGGUI or raises the
+%      existing singleton*.  Starting from the left, property value pairs are
+%      applied to the GUI before KernelRegGUI_OpeningFcn gets called.  An
+%      unrecognized property name or invalid value makes property application
+%      stop.  All inputs are passed to KernelRegGUI_OpeningFcn via varargin.
+%
+%      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
+%      instance to run (singleton)".
+%
+% See also: GUIDE, GUIDATA, GUIHANDLES
+
+% Edit the above text to modify the response to help KernelRegGUI
+
+% Last Modified by GUIDE v2.5 25-Apr-2010 00:57:31
+
+% Begin initialization code - DO NOT EDIT
+gui_Singleton = 1;
+gui_State = struct('gui_Name',       mfilename, ...
+                   'gui_Singleton',  gui_Singleton, ...
+                   'gui_OpeningFcn', @KernelRegGUI_OpeningFcn, ...
+                   'gui_OutputFcn',  @KernelRegGUI_OutputFcn, ...
+                   'gui_LayoutFcn',  [] , ...
+                   'gui_Callback',   []);
+if nargin && ischar(varargin{1})
+    gui_State.gui_Callback = str2func(varargin{1});
+end
+
+if nargout
+    [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
+else
+    gui_mainfcn(gui_State, varargin{:});
+end
+% End initialization code - DO NOT EDIT
+
+% --- Executes just before KernelRegGUI is made visible.
+function KernelRegGUI_OpeningFcn(hObject, eventdata, handles, varargin)
+% This function has no output args, see OutputFcn.
+% hObject    handle to figure
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+% varargin   command line arguments to KernelRegGUI (see VARARGIN)
+
+% Choose default command line output for KernelRegGUI
+handles.output = hObject;
+
+% Update handles structure
+guidata(hObject, handles);
+
+% This sets up the initial plot - only do when we are invisible
+% so window can get raised using KernelRegGUI.
+if strcmp(get(hObject,'Visible'),'off')
+    
+    
+    % Loading the Lidar data from file and plotting
+    load('LidarData.mat','y','X')
+    x = X;
+    plot(x,y,'k.')
+    hold on
+    xlabel('Range')
+    ylabel('LogRatio')
+    legend('Data')
+    xlabel('Range','fontsize',14)
+    ylabel('LogRatio','fontsize',14)
+    title('Illustrating Kernel Regression','fontsize',14)
+    set(gca,'fontsize',10)
+
+    kernelType = 'Epanechnikov';
+    save kernelTypeFile kernelType
+    polyOrder = 0;
+    save polyOrderFile polyOrder
+end
+
+% UIWAIT makes KernelRegGUI wait for user response (see UIRESUME)
+% uiwait(handles.figure1);
+
+
+% --- Outputs from this function are returned to the command line.
+function varargout = KernelRegGUI_OutputFcn(hObject, eventdata, handles)
+% varargout  cell array for returning output args (see VARARGOUT);
+% hObject    handle to figure
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Get default command line output from handles structure
+varargout{1} = handles.output;
+
+
+% --------------------------------------------------------------------
+function FileMenu_Callback(hObject, eventdata, handles)
+% hObject    handle to FileMenu (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --------------------------------------------------------------------
+function OpenMenuItem_Callback(hObject, eventdata, handles)
+% hObject    handle to OpenMenuItem (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+file = uigetfile('*.fig');
+if ~isequal(file, 0)
+    open(file);
+end
+
+% --------------------------------------------------------------------
+function PrintMenuItem_Callback(hObject, eventdata, handles)
+% hObject    handle to PrintMenuItem (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+printdlg(handles.figure1)
+
+% --------------------------------------------------------------------
+function CloseMenuItem_Callback(hObject, eventdata, handles)
+% hObject    handle to CloseMenuItem (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+selection = questdlg(['Close ' get(handles.figure1,'Name') '?'],...
+                     ['Close ' get(handles.figure1,'Name') '...'],...
+                     'Yes','No','Yes');
+if strcmp(selection,'No')
+    return;
+end
+
+delete(handles.figure1)
+
+
+
+
+% --- Executes on slider movement.
+function slider1_Callback(hObject, eventdata, handles)
+% hObject    handle to slider1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+    % Loading the Lidar data from file and plotting
+    kernelType = load('kernelTypeFile','kernelType');
+    kernelType = kernelType.kernelType;
+    p = load('polyOrderFile','polyOrder');
+    p = p.polyOrder;
+    load('LidarData.mat','y','X')
+    x = X;
+    plot(x,y,'k.')
+    hold on
+    xlabel('Range','fontsize',14)
+    ylabel('LogRatio','fontsize',14)
+    %p = 0;
+    b = get(hObject,'Value'); % bandwidth
+    save('Bandwidth','b');
+    title(['Bandwidth = ',num2str(b,3)],'fontsize',14)
+    set(gca,'fontsize',10)
+    [fittedVals,xGrid,kernelOnGrid] = KernelReg(y,x,b,p,kernelType);
+    plot(xGrid,fittedVals,'r')
+    notNan = ~isnan(kernelOnGrid);
+    kernelOnGrid = kernelOnGrid(:)';
+    yLimits = get(gca,'ylim');
+    if strcmpi(kernelType,'Uniform')
+        patchHandle = patch([xGrid(notNan) fliplr(xGrid(notNan))],[((min(kernelOnGrid(notNan))+yLimits(2))/2)*ones(size(kernelOnGrid(notNan))) fliplr(kernelOnGrid(notNan))],[0.749 0.749 0],'linestyle','none');
+    else
+        patchHandle = patch([xGrid(notNan) fliplr(xGrid(notNan))],[min(kernelOnGrid(notNan))*ones(size(kernelOnGrid(notNan))) fliplr(kernelOnGrid(notNan))],[0.749 0.749 0],'linestyle','none');
+    end
+    set(patchHandle,'linestyle','none','faceLighting','phong','facealpha',0.5,'edgecolor',[0.749 0.749 0])
+    legend('Data','Estimated E(y|x)')
+    hold off
+
+
+% --- Executes during object creation, after setting all properties.
+function slider1_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to slider1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+load('LidarData.mat','y','X')
+set(hObject,'SliderStep',[0.0001 0.02])
+set(hObject,'Max',max(X)/2)
+set(hObject,'Min',1)
+set(hObject,'Value',get(hObject,'Min'))
+
+
+% --- Executes on selection change in popupmenu2.
+function popupmenu2_Callback(hObject, eventdata, handles)
+% hObject    handle to popupmenu2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu2 contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from popupmenu2
+
+contents = cellstr(get(hObject,'String'));
+kernelType = contents{get(hObject,'Value')};
+save kernelTypeFile kernelType
+
+p = load('polyOrderFile','polyOrder');
+p = p.polyOrder;
+load('LidarData.mat','y','X')
+x = X;
+plot(x,y,'k.')
+hold on
+xlabel('Range','fontsize',14)
+ylabel('LogRatio','fontsize',14)
+b = load('Bandwidth','b');
+b = b.b;
+title(['Bandwidth = ',num2str(b,3)],'fontsize',14)
+set(gca,'fontsize',10)
+[fittedVals,xGrid,kernelOnGrid] = KernelReg(y,x,b,p,kernelType);
+plot(xGrid,fittedVals,'r')
+notNan = ~isnan(kernelOnGrid);
+kernelOnGrid = kernelOnGrid(:)';
+yLimits = get(gca,'ylim');
+if strcmpi(kernelType,'Uniform')
+    patchHandle = patch([xGrid(notNan) fliplr(xGrid(notNan))],[((min(kernelOnGrid(notNan))+yLimits(2))/2)*ones(size(kernelOnGrid(notNan))) fliplr(kernelOnGrid(notNan))],[0.749 0.749 0],'linestyle','none');
+else
+    patchHandle = patch([xGrid(notNan) fliplr(xGrid(notNan))],[min(kernelOnGrid(notNan))*ones(size(kernelOnGrid(notNan))) fliplr(kernelOnGrid(notNan))],[0.749 0.749 0],'linestyle','none');
+end
+set(patchHandle,'linestyle','none','faceLighting','phong','facealpha',0.5,'edgecolor',[0.749 0.749 0])
+legend('Data','Estimated E(y|x)')
+hold off
+
+
+% switch kernelType
+%     case 'Epanechnikov'   % User selected the first item
+%         save kernelTypeFile kernelType
+%     case 'Gaussian'   % User selected the second item
+%         disp b
+%     case 'Uniform'   % User selected the second item
+%         disp c
+% end
+
+
+% --- Executes during object creation, after setting all properties.
+function popupmenu2_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to popupmenu2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on selection change in popupmenu3.
+function p = popupmenu3_Callback(hObject, eventdata, handles)
+% hObject    handle to popupmenu3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu3 contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from popupmenu3
+kernelType = load('kernelTypeFile','kernelType');
+kernelType = kernelType.kernelType;
+contents = cellstr(get(hObject,'String'));
+p = contents{get(hObject,'Value')};
+p = str2num(p);
+load('LidarData.mat','y','X')
+x = X;
+plot(x,y,'k.')
+hold on
+xlabel('Range','fontsize',14)
+ylabel('LogRatio','fontsize',14)
+b = load('Bandwidth','b');
+b = b.b
+title(['Bandwidth = ',num2str(b,3)],'fontsize',14)
+set(gca,'fontsize',10)
+[fittedVals,xGrid,kernelOnGrid] = KernelReg(y,x,b,p,kernelType);
+plot(xGrid,fittedVals,'r')
+notNan = ~isnan(kernelOnGrid);
+kernelOnGrid = kernelOnGrid(:)';
+yLimits = get(gca,'ylim');
+if strcmpi(kernelType,'Uniform')
+    patchHandle = patch([xGrid(notNan) fliplr(xGrid(notNan))],[((min(kernelOnGrid(notNan))+yLimits(2))/2)*ones(size(kernelOnGrid(notNan))) fliplr(kernelOnGrid(notNan))],[0.749 0.749 0],'linestyle','none');
+else
+    patchHandle = patch([xGrid(notNan) fliplr(xGrid(notNan))],[min(kernelOnGrid(notNan))*ones(size(kernelOnGrid(notNan))) fliplr(kernelOnGrid(notNan))],[0.749 0.749 0],'linestyle','none');
+end
+set(patchHandle,'linestyle','none','faceLighting','phong','facealpha',0.5,'edgecolor',[0.749 0.749 0])
+legend('Data','Estimated E(y|x)')
+hold off
+
+
+% --- Executes during object creation, after setting all properties.
+function popupmenu3_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to popupmenu3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in pushbutton4.
+function pushbutton4_Callback(hObject, eventdata, handl

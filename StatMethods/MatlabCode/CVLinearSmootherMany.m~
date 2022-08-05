@@ -1,0 +1,21 @@
+function [lambdaOptCV, lambdaOptGCV, CV, GCV] = CVLinearSmootherMany(y,x,p,nKnots,modelType,standardizeX,lambdaGrid)
+
+n = length(y);
+nLambdas = length(lambdaGrid);
+CV = zeros(nLambdas,1);
+GCV = zeros(nLambdas,1);
+count = 0;
+for lambda = lambdaGrid
+    if strcmpi(model,'spline')
+    [fittedVals,xGrid,knots,dfFit,S] = SplineReg(y,x,lambda,p,nKnots,modelType,standardizeX,nan);
+    else
+        [fittedVals,xGrid,kernelOnGrid,dfFit,Slambda] = KernelReg(y,x,lambda,p,modelType,standardizeX,nGridPoints); % Note the bandwidth b = lambda
+    end
+    count = count + 1;
+    residuals = y - fittedVals;
+    CV(count) = mean((residuals./(1-diag(S))).^2);
+    GCV(count) = mean((residuals./(1-trace(S)/n)).^2);
+end
+lambdaOptCV = lambdaGrid(CV==min(CV));
+lambdaOptGCV = lambdaGrid(GCV==min(GCV));
+

@@ -1,0 +1,41 @@
+function [] = kernelReg(y,x,b,p)
+
+% Hard coded user inputs
+nGridPoints = 100;
+
+% Prelims
+
+% Makes sure that x and y are column vectors
+x = x(:); 
+y = y(:);
+
+n = size(x,1);
+
+% Setting up the grid of x-values where we evaluate E(y|x)
+xGrid = linspace(min(x),max(x),nGridPoints);
+fittedVals = zeros(nGridPoints,1); % Here we store the fits
+
+% Estimating all the local regression fits.
+Xlocal = [ones(n,1) zeros(n,p)]; % This is the local covariate matrix, later we modify it
+W = eye(n,n); % This is the weight matrix, later we modify it
+for i = 1:nGridPoints
+    % Setting up the local regression covariates
+    x0 = xGrid(i); % This is the x-value where we are currently making the local fit
+    for j = 1:p
+        Xlocal(:,j+1) = (x-x0).^p;
+    end
+    W = diag(epanKernel(x,x0,b));
+    localBeta = (Xlocal'*W*Xlocal) \ (Xlocal'*W*y); % This is a fast and stable way to computing inv(Xlocal'*W*Xlocal)*(Xlocal'*W*y)
+    fittedVals(i) = localBeta(1); % The fitted value is just the intercept in this model.
+end
+
+
+end
+
+function K = epanKernel(x,x0,b)
+
+t = abs(x-x0)/b;
+K = zeros(length(t),1);
+K(abs(t) <= 1) = (3/4)*(1-t.^2);
+end
+

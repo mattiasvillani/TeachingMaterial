@@ -1,0 +1,31 @@
+% Settings
+PriorMean = 0;
+PriorStd = 10;
+NIter = 1000;    % Number of Gibbs sampling draws from posterior
+NRepIter = 100;  % Number of data replications for each posterior draw.
+
+% Normal data x1,...,xn ~iid N(2,0.5²)
+Data = 2 + randn(500,1)*0.5;
+[XRepStatSample,XObsStat,MuRes,SigmaRes]=PostPredAnalysisNormal(Data,PriorMean,PriorStd,NIter,NRepIter);
+
+[nInBins,BinPos] = hist(XRepStatSample,50);
+hold on
+bar(BinPos,nInBins,'y')
+plotHandle = plot(XObsStat,0,'or');
+set(plotHandle,'markersize',10,'markerfacecolor','r')
+title('T(y) = max(y). Normal Data - Normal Model')
+xlabel('Max')
+
+
+% student t data x1,...,xn ~iid t(2,0.5²) with 10 degrees of freedom
+Data = 2 + randt(10*ones(500,1))*0.5;
+[XRepStatSample,XObsStat,MuRes,SigmaRes]=PostPredAnalysisNormal(Data,PriorMean,PriorStd,NIter,NRepIter);
+
+[nInBins,BinPos] = hist(XRepStatSample,50);
+hold on
+bar(BinPos,nInBins,'y')
+plotHandle = plot(XObsStat,0,'or');
+set(plotHandle,'markersize',10,'markerfacecolor','r')
+title('T(y) = max(y). Normal Data - Normal Model')
+xlabel('Max')
+

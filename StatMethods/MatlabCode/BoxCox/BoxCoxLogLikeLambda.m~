@@ -1,0 +1,7 @@
+function negLogLik = BoxCoxLogLikeLambda(lambda,y,geoMeanY,H)
+
+% This is the logLikelihoo
+n = length(y);
+yTilde = BoxCoxTrans(y,lambda)/(geoMeanY^(lambda-1));
+negLogLik = (yTilde'*H*yTilde)/n;
+

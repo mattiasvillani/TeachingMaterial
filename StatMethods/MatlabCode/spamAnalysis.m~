@@ -1,0 +1,89 @@
+%% Prelims
+xGrid = 0:0.0001:1;
+
+%% Plot 1 - posterior for different priors
+
+figure('name','Posterior for spam data for different priors')
+
+% Prior 1
+alpha_ = 1;
+beta_ = 1;
+subplot(2,2,1)
+hold on
+plot(xGrid,betapdf(xGrid,alpha_,beta_),'linewidth',2,'color','b','linestyle','--');
+plot(xGrid,betapdf(xGrid,alpha_ + 1813,beta_+2788),'linewidth',2,'color','r');
+title(['\alpha = ',int2str(alpha_),',' '   \beta = ',int2str(beta_)])
+set(gca,'ylim',[0 100])
+
+% Prior 2
+alpha_ = 100;
+beta_ = 1;
+subplot(2,2,2)
+hold on
+plot(xGrid,betapdf(xGrid,alpha_,beta_),'linewidth',2,'color','b','linestyle','--');
+plot(xGrid,betapdf(xGrid,alpha_ + 1813,beta_+2788),'linewidth',2,'color','r');
+title(['\alpha = ',int2str(alpha_),',' '   \beta = ',int2str(beta_)])
+set(gca,'ylim',[0 100])
+
+% Prior 3
+alpha_ = 1;
+beta_ = 100;
+subplot(2,2,3)
+hold on
+plot(xGrid,betapdf(xGrid,alpha_,beta_),'linewidth',2,'color','b','linestyle','--');
+plot(xGrid,betapdf(xGrid,alpha_ + 1813,beta_+2788),'linewidth',2,'color','r');
+title(['\alpha = ',int2str(alpha_),',' '   \beta = ',int2str(beta_)])
+set(gca,'ylim',[0 100])
+
+% Prior 4
+alpha_ = 1000;
+beta_ = 1000;
+subplot(2,2,4)
+hold on
+plot(xGrid,betapdf(xGrid,alpha_,beta_),'linewidth',2,'color','b','linestyle','--');
+plot(xGrid,betapdf(xGrid,alpha_ + 1813,beta_+2788),'linewidth',2,'color','r');
+title(['\alpha = ',int2str(alpha_),',' '   \beta = ',int2str(beta_)])
+set(gca,'ylim',[0 100])
+
+
+%% Plot 2 - Posterior evolution
+load SpamData.dat
+y = SpamData(:,1);
+y = randsample(y,length(y)); % Randomize the order
+figure('name','Convergence of posterior for spam data')
+
+alpha_ = 1;
+beta_ = 1;
+subplot(2,1,1)
+HPDIntervals = zeros(length(y)+1,2);
+for i = 0:length(y),i
+    s = sum(y(1:i));
+    f = i - sum(y(1:i));
+    pdfVals = betapdf(xGrid,alpha_+s,beta_+f);
+    HPDIntervals(i+1,:) = HPDUnivariate(xGrid,pdfVals,0.95);    
+end
+hold on
+plot([0:length(y)],HPDIntervals(:,1),'r','linewidth',2)
+plot([0:length(y)],HPDIntervals(:,2),'b','linewidth',2)
+legend('Lower bound 95% HPD interval','Upper bound 95% HPD interval')
+set(gca,'xlim',[0 length(y)])
+xlabel('Number of observations used in the posterior')
+
+
+alpha_ = 1;
+beta_ = 100;
+subplot(2,1,1)
+HPDIntervals = zeros(length(y)+1,2);
+for i = 0:length(y),i
+    s = sum(y(1:i));
+    f = i - sum(y(1:i));
+    pdfVals = betapdf(xGrid,alpha_+s,beta_+f);
+    HPDIntervals(i+1,:) = HPDUnivariate(xGrid,pdfVals,0.95);    
+end
+hold on
+plot([0:length(y)],HPDIntervals(:,1),'r','linewidth',2)
+plot([0:length(y)],HPDIntervals(:,2),'b','linewidth',2)
+legend('Lower bound 95% HPD interval','Upper bound 95% HPD interval')
+set(gca,'xlim',[0 length(y)])
+xlabel('Number of observations used in the posterior')
+

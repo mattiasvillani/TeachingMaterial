@@ -1,0 +1,17 @@
+% Simulate data
+n = 1000; % Number of observations
+sigma = 0.5; % Standard deviations of the errors in the data generating model.
+x = -5 + rand(n,1)*10; % Simulate covariate values from Uniform[-5,5]
+y = 1 -1*x + randn(n,1)*sigma;
+plot(x,y,'.')
+hold on
+plot(x,y,
+
+% Estimate a polynomial kernel regression model of order p
+b = 0.5; % Kernel bandwidth
+p = 0; % Order of the polynomial
+[fittedVals,xGrid] = KernelReg(y,x,b,p);
+plot(xGrid,fittedVals,'r')
+
+
+

@@ -1,0 +1,7 @@
+# install.packages("gam") # downloading the gam package from the internet
+library(gam) # Loading the gam package into memory
+
+# Loading data from file
+spamData<-read.table("SpamReduced.dat",header=TRUE)  # Spam data from Hastie et al.
+
+gamObj <- gam(spam ~ s(CapRunTotal,df = 4) + s(our,4) + s(over,df = 4)  + s(remove,df = 4) + s(internet,df = 4) + s(free,df = 4) + s(hpl,df = 4) + s(X.,df = 4)     , family = binomial, data = spamData)

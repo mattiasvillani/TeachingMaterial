@@ -1,0 +1,23 @@
+% Loading the Lidar data from file
+load('LidarData','y','X')
+x = X;
+
+% Plotting the simulated data and the true mean curve (data has to be
+% sorted to do this)
+plot(x,y,'k.')
+hold on
+
+% Estimate a polynomial kernel regression model of order p
+b = 20; % Kernel bandwidth
+p = 1; % Order of the polynomial
+kernelType = 'Uniform';
+[fittedVals,xGrid,kernelOnGrid] = KernelReg(y,x,b,p,kernelType);
+plot(xGrid,fittedVals,'r')
+notNan = ~isnan(kernelOnGrid);
+kernelOnGrid = kernelOnGrid';
+yLimits = get(gca,'ylim');
+pathcHandle = patch([xGrid(notNan) fliplr(xGrid(notNan))],[yLimits(1)*ones(size(kernelOnGrid(notNan))) fliplr(kernelOnGrid(notNan))],[0.8 0.8 0.8]);
+
+xlabel('Range')
+ylabel('LogRatio')
+legend('Data','Estimated E(y|x)')

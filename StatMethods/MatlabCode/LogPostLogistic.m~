@@ -1,0 +1,8 @@
+function logPostValue = LogPostProbit(betaVect,y,X,mu,Sigma)
+
+nPara = length(betaVect);
+linPred = X*betaVect;
+
+logLik = sum( linPred.*y -log(1 + exp(linPred)));
+logPrior = log(mvnpdf(betaVect, mu, Sigma));
+logPostValue = -(logLik + logPrior); % Note Matlabs fminunc.m only minimizes, hence the minus sign here.
